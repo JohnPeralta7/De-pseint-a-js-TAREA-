@@ -604,9 +604,413 @@ class Ejercicios{
 
     //SUMA DE NUMEROS CON BUCLE WHILE
     Ejercicio49() {
+        //EN ESTE EJERCICIO SE PODIA DEFINIR n1 CON EL DOCUMENT.GETELEMENTBYID PERO AL USAR PROMPT NO LO HE VISTO NECESARIO
+        //SE DECLARA E INICIA VARIABLES AQUI
+        let n1=0, rr=0;
+        //LUEGO ABRO EL CICLO WHILE PONIENDO COMO CONDICION QUE SI n1 ES MAYOR IGUAL A 0 (OSEA POSITIVO) SE REALIZARA REPETITIVAMENTE LAS SIGUIENTES ACCIONES
+        while (n1>=0) {
+        //AQUI LE ASIGNO EL VALOR A n1 DE PROMPT, PROMPT EN SI ES UNA MANERA DE PEDIR DATOS COMO SI FUERA UNA ALERTA, LA ESTRUCTURA ES TAL CUAL COMO LA VES
+            n1 = parseInt(prompt("Ingresa numeros positivos (negativo si deseas terminar)"));
+        //LUEGO ABRO UNA CONDICION DONDE INDICO QUE SI n1 ES MENOR A 0 (OSEA NEGATIVO) REALIZARA LA SIGUIENTE ACCION
+            if (n1 < 0 ) {
+        //LA ACCION SE LLAMA BREAK, ESTE BREAK LO QUE HACE ES QUE SE ROMPA EL BUCLE (WHILE)
+                break
+            }
+        //Y BUENO ACA EN CAMBIO ES QUE MIENTRAS SEA POSITIVO Y NO SEA NEGATIVO ME LOS VA A SUMAR CON UN ACUMULADOR
+            rr = rr + n1;
+        //AQUI PUSE UN CONSOLE.LOG PORQUE LO ESTABA TESTEANDO, REALMENTE NO ES NECESARIO USAR CONSOLE.LOG
+            //console.log(rr);
+        }
+        //AQUI SI USO DOCUMENT.GETELEMENTBYID PORQUE NECESITO QUE ME MUESTRE LA SUMA TOTAL EN LA PARTE HTML
+        document.getElementById("Respuesta49").innerHTML = "La suma total es : " + rr;
         
     }
 
+
+
+    //CUENTA REGRESIVA
+    Ejercicio50() {
+        let n1=0, i=0;
+        n1 = parseInt(document.getElementById("n1").value);
+        
+        for (i = n1 ; i >= 1; i--) {
+            document.getElementById("Respuesta50").innerHTML += "<br>" + i;
+        }
+
+
+    }
+
+
+
+    //SUMA DE ELEMENTOS DE UN ARREGLO
+    Ejercicio51() {
+        //CREO LAS VARIABLES QUE VOY A USAR
+        //n1 es lo que le pido al user, este lo inicio como caracteres, porque apartir de caracteres es que luego lo convertir en numeros dentro de un arreglo
+        let n1="", i=0, rr=0, arreglo, num, longitud;
+        //AQUI ES DONDE PONGO QUE LO PIDO
+        n1 = document.getElementById("n1").value;
+        //AQUI EN n1.split, se usa para convertir la cadena de caracteres en arreglo usando "," porque esta es la que separa los numeros, (asi le pedi al user que mande los datos)
+        arreglo = n1.split(",");
+        //AQUI USE arreglo.map(number) porque indico que el anterior arreglo de caracteres me lo tiene que convertir en numero
+        //es decir, si el arreglo de caracteres era ["1", "2", "3"], usando .map(number) serian [1,2,3]
+        num = arreglo.map(Number);
+        //luego uso .length que es una funcion que me permite saber el tamano o la cantidad de elementos que hay en el arreglo
+        longitud = num.length;
+        //FINALMENTE HAGO MI BUCLE FOR
+        for (i = 0; i < longitud; i++) {
+        // HAGO UN ACUMULADOR DONDE INDICO QUE num[i] que cada vuelta que de el bucle for va cambiar la posicion del arreglo hasta que me de todos los numeros del arreglo en el acumulador
+        //y me los suma
+            rr = rr + parseInt(num[i]);
+        }
+        //AQUI PRESENTO TODO
+        document.getElementById("Respuesta51").innerHTML = "La suma de los elementos presentados es :" + rr;
+
+    }
+
+
+
+
+
+    //PROMEDIO DE CALIFICACIONES
+    Ejercicio52() {
+        //AQUI DEFINI MIS VARIABLES QUE USARE EN EL EJERCICIO
+        let n1="", rr, acu=0, arreglo, num, longitud, i=0;
+        //AQUI LE ASIGNO EL VALOR DE n1, QUE SERA LO QUE EL USER DIGA EN HTML 
+        n1 = document.getElementById("n1").value;
+        //TENIENDO EN CUENTA QUE EL USER ME DA COMO DATO ESTO "1,2,3,4,5" TENIENDO QUE ESTO ESTA ENTRE COMILLAS, ES BASICAMENTE UNA CADENA DE CARACTERES
+        //PARA SEPARAR ESOS CARACTERES Y CONVERTIRLOS EN UN ARREGLO, SE USA LA FUNCION .SPLIT(",") LO QUE ESTA DENTRO DEL PARENTESIS, Y ENTRE COMILLAS
+        //SIGNIFICA QUE ES EL DELIMITADOR, OSEA LO QUE SEPARARA LOS ELEMENTOS DE CARACTERES PARA GUARDARLOS EN UN ARREGLO
+        //COMO EN UN EJEMPLO ARRIBA SI n1 = "1,2,3" USANDO LA FUNCION n1.split(",") ESTARIA CONVIRTIENDO LAS CADENAS DE ESTA MANERA 
+        // arreglo = ["1","2","3"] OSEA ESTO SERIA UN ARREGLO DE CARACTERES PORQUE LOS ELEMENTOS DENTRO ESTAN ENTRE COMILLAS
+        arreglo = n1.split(",");
+        //PARA CONVERTIR NUESTRO ARREGLO DE CARACTERES A UN ARREGLO DE NUMEROS SE USA LA SIGUIENTE FUNCION .MAP(NUMBER) A LADO DE LA VARIABLE ARREGLO
+        num = arreglo.map(Number);
+        //BUENO AQUI LO QUE HICE FUE NUM.LENGTH QUE ES PARA SABER EL TAMANO O LA CANTIDAD DE ELEMENTOS QUE TIENE EL ARREGLO
+        longitud = num.length;
+        //AQUI SE ABRE EL CICLO FOR
+        for (i = 0; i < longitud; i++) {
+        //AQUI ACU ES EL ACUMULADOR DE MIS ELEMENTOS DE ARREGLO, ES DECIR LOS ELEMENTOS QUE TENGA NUM[I] ME LOS VA A SUMAR 
+            acu = acu + num[i];
+            
+
+        }
+        //ACA AFUERA DEL CICLO SE HACE LA OPERACION PARA SACAR EL PROMEDIO DONDE LA SUMA DE LAS CALIFICACIONES QUE ES ACU, PORQUE ME ACUMULO LOS VALORES DEL ARREGLO
+        //Y LONGITUD QUE ES LA CANTIDAD MAX DE ELEMENTOS QUE TIENE EL ARREGLO LO DIVIDE, ASI TENIENDO EL PROMEDIO
+        rr = acu / longitud;
+        //EL .TOFIXED(2) ES PARA REDONDEAR, Y LE PUSE EL 2 DENTRO DE PARENTESIS PORQUE LE ESTOY INDICANDO LA CANTIDAD DECIMALES QUE QUIERO QUE ME APAREZCAN
+        rr = rr.toFixed(2);
+        //FINALMENTE PRESENTO
+        document.getElementById("Respuesta52").innerHTML = "Promedio de calificaciones : " + rr;
+    }
+
+
+
+
+    //MAYOR Y MENOR VALORES
+    Ejercicio53() {
+        //AQUI DEFINO LAS VARIABLES
+        let n1="",minimo=0,maximo=0, arreglo, num, longitud, i=0;
+        //LE ASIGNO EL VALOR DE LO QUE LE PIDO EN HTML
+        n1 = document.getElementById("n1").value;
+        //ASI MISMO HAGO EL MISMO PROCEDIMIENTO QUE EL DE ARRIBA, QUE ES GUARDAR ESTOS DATOS EN UN ARREGLO
+        arreglo = n1.split(",");
+        //EL ANTERIOR ARREGLO DE CARACTERES LO CONVIERTO EN NUMEROS
+        num = arreglo.map(Number);
+        //ACA LA CANTIDAD DE ELEMENTOS DEL ARREGLO
+        longitud = num.length
+        //AQUI LO QUE ESTOY HACIENDO ES ASIGNAR A LA VARIABLE MAXIMO Y MINIMO EL VALOR DEL ARREGLO EN LA POSICION 0, OSEA LOS DOS TIENEN EL MISMO VALOR
+        //AQUI UN EJEMPLO CON VALORES EN UN ARREGLO PARA QUE NO EXISTAN DUDAS
+        //MI VARIABLE NUM TENDRA LOS SIGUIENTES VALORES EN SU ARREGLO
+        //NUM[1,2,3]
+        //AHORA SI ESTOY DICIENDO QUE MAXIMO IGUAL A PARSEINT(NUM[0])
+        //ME ESTA DICIENDO PRACTICAMENTE MAXIMO = 1
+        //PORQUE SI REVISAMOS EL ARREGLO EN LA POSICION NUM[0] ES EL 1
+        maximo=parseInt(num[0])
+        //LO MISMO SERIA PARA MINIMO
+        //ENTONCES DIRIAMOS QUE MAX = 1 Y MIN = 1
+        minimo=parseInt(num[0])
+        //AQUI ABRO UN CICLO FOR
+        //AQUI EL CICLO SERIA QUE EMPUIE
+        for (i = 0; i < longitud; i++) {
+            //AQUI ABRO UNA CONDICION DONDE INDICO QUE SI EL NUMERO DE LA VARIABLE MINIMO ES MAYOR A NUM[I] ENTONCES DEBERA 
+            if (minimo > num[i]) {
+            //REASIGNARLE OTRO VALOR A MINIMO, OSEA SOBREESCRIBRIENDO EL VALOR CON EL VALOR DE NUM[I]
+            
+                minimo=num[i]
+                //LO MISMO CON EL VALOR MAX
+            }else if (maximo < num[i]){
+                maximo=num[i]
+            }
+        }
+
+        document.getElementById("Respuesta53").innerHTML = "El maximo es : " + maximo;
+        document.getElementById("Respuesta53").innerHTML += "<br>El minimo es : " + minimo;
+    }
+
+
+
+    //BUSCAR ELEMENTO
+    Ejercicio54() {
+        let n1="", n2=0, arreglo, num, i=0, longitud, patito=false;
+        n1 = document.getElementById("n1").value;
+        n2 = document.getElementById("n2").value;
+        arreglo = n1.split(",");
+        num = arreglo.map(Number);
+        longitud = num.length;
+        for (i = 0; i < longitud; i++) {
+            //OJO QUE AQUI ABRI UNA CONDICION DENTRO DEL CICLO PARA INDICARLE QUE SI N2 ES IGUAL AL VALOR DEL ARREGLO EN LA POSICION QUE ME INDIQUE I 
+            //LA VARIABLE PATITO QUE LE ASIGNE UN VALOR AL INICIO DE FALSE, CAMBIARA A TRUE
+            if (n2 == num[i]) {
+                console.log("SI")
+                patito=true;
+            }
+        }
+        //AFUERA DEL CICLO FOR ABRO OTRA CONDICION DONDE INDICO QUE SI LA VARIABLE PATITO ES TRUE ENTONCES ME DARA UNA RESPUESTA, SINO ME DA LA OTRA
+        if (patito==true) {
+            document.getElementById("Respuesta54").innerHTML = "Si esta en el arreglo";
+        
+        } else {
+            document.getElementById("Respuesta54").innerHTML = "NO esta en el arreglo";
+        }
+                
+                
+        
+        
+    }
+
+
+
+    //CONTAR ELEMENTOS PARES
+    Ejercicio55() {
+        let n1="", arreglo, num, i=0, longitud, pares, c=0;
+        n1 = document.getElementById("n1").value;
+        arreglo = n1.split(",");
+        num = arreglo.map(Number);
+        longitud = num.length;
+        for (i = 0; i < longitud; i++) {
+            //AQUI DENTRO DEL CICLO FOR, HICE UNA OPERACION QUE ME VA COMPROBAR SI ES PAR, DATE CUENTA QUE EL ARREGLO NUM[I] ME VA IR CAMBIANDO EN CADA VUELTA EL VALOR POR I 
+            //YA QUE AQUI I ME ESTA AYUDANDO A INDICAR LA POSICION DEL ARREGLO Y POR TANTO ME MOSTRARA EL VALOR DEL DATO EN LA POSICION INDICADA
+            pares = num[i] % 2;
+            //AQUI HICE UNA CONDICION DONDE SI PAR ES 0 EL CONTADO ME LO CUENTA, SINO NO
+            if (pares == 0) {
+                c = +c + +1;
+            }
+        }
+        //ASI MISMO ABRO UNA CONDICION DONDE SI SE CUMPLE CIERTA CONDICION ME DA UNA RESPUESTA, Y SINO ME DA LA OTRA
+        if (c > 0) {
+            document.getElementById("Respuesta55").innerHTML = "Pares : " + c;
+        } else {
+            document.getElementById("Respuesta55").innerHTML = "NO HAY PARES";
+        }
+        
+    }
+
+
+
+
+    //INVERSION DE ELEMENTOS
+    Ejercicio56() {
+        let n1="", arreglo, num, i=0, longitud, arreglo2="";
+        n1 = document.getElementById("n1").value;
+        arreglo = n1.split(",");
+        num = arreglo.map(Number);
+        longitud = num.length;
+        //OTRA COSITA MAS, RECUERDA QUE PARA INDICAR QUE QUEREMOS EMPEZAR DESDE EL ULTIMO VALOR DEL ARREGLO DEBEMOS SI O SI PONER -1 EN EL RESULTADO DE LONGITUD
+        //PORQUE RECUERDA QUE LOS ARREGLOS EMPIEZAN DE 0, ENTONCES SI QUIERO QUE EL INDICADOR ME EMPIECE DEL ULTIMO VALOR HASTA 0 ENTONCES DEBO PONERLE -1
+        for (i = longitud-1; i >= 0; i--) {
+            //OJO AQUI DE LO QUE HICE, QUE DENTRO DEL CICLO FOR PARA GUARDAR LOS DATOS DEL ARREGLO INVERTIDO LO QUE HICE FUE ASIGNARLE A LA SEGUNDA VARIABLE ARREGLO2 
+            // DATE CUENTA QUE LE PUSE UN += QUE ESTO ME INDICA QUE ME VA A CONCATENAR LO ANTERIOR, OSEA ME LOS VA IR GUARDANDO EN EL ORDEN DE LA INVERSION
+            arreglo2 += num[i] + ",";
+        }
+
+        document.getElementById("Respuesta56").innerHTML = "La inversion : " + arreglo2;
+    }
+
+
+    //BUSCAR INDICE
+    Ejercicio57() {
+        let num= [];
+        let indices= [];
+        let n1 = 0, longitud=0;
+        n1 = parseInt(document.getElementById("n1").value);
+        
+        for (let i = 0; i < 5; i++) {
+            num[i]= parseInt((Math.random()*9));       
+        }
+        
+        for (let i = 0; i < num.length; i++) {
+            if (num[i] == n1) {
+                indices.push(i);
+            }
+        }
+        longitud = indices.length;
+        if (longitud > 1) {
+            document.getElementById("Respuesta57").innerHTML = "Se repite algunas veces, se presenta arreglo :" + num;
+
+        } else if (longitud == 1) {
+            document.getElementById("Respuesta57").innerHTML = "Se repite una vez";
+        } else {
+            document.getElementById("Respuesta57").innerHTML = "No se encontro";
+        }
+    }
+
+
+    //FUNCION SALUDAR SIN PARAMETROS
+    Ejercicio58() {
+        document.getElementById("Respuesta58").innerHTML = "Hola panita";
+    }
+
+
+    //AQUI EMPIEZA EJERCICIO DE FUNCION DE SUMA DE DOS NUMEROS
+    SUMA(n1,n2) {
+        let rr = +n1 + +n2;
+        document.getElementById("Respuesta59").innerHTML = "La suma es : " + rr;
+    }
+
+    Ejercicio59() {
+        let n1=0, n2=0;
+        n1 = parseInt(document.getElementById("n1").value);
+        n2 = parseInt(document.getElementById("n2").value);
+        this.SUMA(n1,n2);
+    }
+    //AQUI TERMINA EL EJERCICIO DE SUMA DE DOS NUMEROS CON FUNCION Y PARAMETROS
+
+
+
+    //AQUI EMPIEZA EJERCICIO DE FUNCION DE MULTIPLICACION DE DOS NUMEROS CON RETURN
+    MULTIPLICACION(n1,n2) {
+        let rr = 0;
+        rr = n1 * n2;
+        return rr;
+    }
+
+    Ejercicio60() {
+        let n1=0, n2=0, resultado=0;
+        n1 = document.getElementById("n1").value;
+        n2 = document.getElementById("n2").value;
+        resultado = this.MULTIPLICACION(n1,n2);
+        document.getElementById("Respuesta60").innerHTML = "Resultado es : " + resultado;
+    }
+    //AQUI TERMINA EL EJERCICIO DE FUNCION MULTIPLICACION DE DOS NUMEROS CON PARAMETRO Y RETURN
+
+    //AQUI EMPIEZA EL EJERCICIO DE FUNCION SIN RETURN PARA DETERMINAR SI ES PAR O IMPAR
+    NOTPAR(n1) {
+        let par = n1 % 2;
+        if (par == 0) {
+            document.getElementById("Respuesta61").innerHTML = "Es par el numero ingresado";
+        } else {
+            document.getElementById("Respuesta61").innerHTML = "Es impar el numero ingresado";
+        }
+    }
+
+
+    Ejercicio61() {
+        let n1=0;
+        n1 = document.getElementById("n1").value;
+        this.NOTPAR(n1);
+    }
+
+    //AQUI SE TERMINA EL EJERICICIO DE FUNCION SIN RETURN PARA DETERMINAR SI ES PAR O IMPAR
+    
+    //AQUI EMPIEZA EJERCICIO DE AREA DE UN TRIANGULO CON PARAMETROS Y RETURN
+    BASE(n1,n2) {
+        let rr = (n1 * n2) / 2;
+        return rr;
+    }
+
+    Ejercicio62() {
+        let n1=0, n2=0, resultado=0;
+        n1 = document.getElementById("n1").value;
+        n2 = document.getElementById("n2").value;
+        resultado = this.BASE(n1,n2);
+        document.getElementById("Respuesta62").innerHTML = "El area es :" + resultado;
+    }
+    //AQUI TERMINA EL EJERCICIO DE AREA DE UN TRIANGULO CON PARAMETROS Y RETURN
+
+    //AQUI EMPIEZA FUNCION IMPRIME TU NOMBRE SIN PARAMETROS
+    NAME() {
+        let n1 = "";
+        n1 = document.getElementById("n1").value;
+        document.getElementById("Respuesta63").innerHTML = "Hola " + n1;
+    }
+    
+    
+    
+    Ejercicio63() {
+        this.NAME();
+    }
+
+    //AQUI TERMINA FUNCION IMPRIME TU NOMBRE SIN PARAMETROS
+
+    //AQUI EMPIEZA LA FUNCION CONVERSION DE CELSIUS A FARENHEIT CON RETURN
+    CONVERSION(n1) {
+       let rr = ( n1 * 9 / 5) + 32;
+       return rr;
+
+    }
+    
+    Ejercicio64() {
+        let n1=0, resultado=0;
+        n1 = parseFloat(document.getElementById("n1").value);
+        resultado = this.CONVERSION(n1);
+        resultado = resultado.toFixed(2);
+        document.getElementById("Respuesta64").innerHTML = "Resultado de la conversion : " + resultado;
+
+    }
+
+    //AQUI TERMINA LA FUNCION CONVERSION DE CELSIUS A FARENHEIT CON RETURN
+
+    //AQUI EMPIEZA FUNCION PARA CONTAR CARACTERES CON PARAMETROS
+
+    CARACTER(n1) {
+        let rr = 0;
+        rr = n1.length;
+        document.getElementById("Respuesta65").innerHTML = "La cantidad de caracteres es : " + rr;
+    }
+
+    Ejercicio65() {
+        let n1="";
+        n1 = document.getElementById("n1").value;
+        this.CARACTER(n1);
+    }
+
+    //AQUI TERMINA FUNCION PARA CONTAR CARACTERES CON PARAMETROS
+
+    //AQUI EMPIEZA FUNCION PARA IMPRIMIR NUMEROS SIN RETURN DEL 1 AL 10
+    IMP1AL10() {
+        let i = 0;
+        for (i = 1; i < 11; i++) {
+            document.getElementById("Respuesta66").innerHTML += "<br> " + i;
+
+        }
+    }
+
+    Ejercicio66() {
+        this.IMP1AL10();
+    }
+
+    //AQUI TERMINA FUNCION PARA IMPRIMIR NUMEROS SIN RETURN DEL 1 AL 10
+
+    //AQUI EMPIEZA FUNCION PARA SUMAR ELEMENTOS CON PARAMETROS Y RETURN
+    SUMATORIA(n1) {
+        let rr = 0, arreglo, num, acu=0, longitud;
+        arreglo = n1.split(",");
+        num = arreglo.map(Number);
+        longitud = num.length;
+        for (let i = 0; i < longitud; i++) {
+            acu = acu + num[i];
+
+        }
+        return acu;
+    }
+
+    
+    Ejercicio67() {
+        let n1="", resultado=0;
+        n1 = document.getElementById("n1").value;
+        resultado = this.SUMATORIA(n1);
+        document.getElementById("Respuesta67").innerHTML = "La SUMA de los elementos : " + resultado;
+    }
 
 
 
@@ -664,3 +1068,21 @@ ope.Ejercicio45()
 ope.Ejercicio46()
 ope.Ejercicio47()
 ope.Ejercicio48()
+ope.Ejercicio49()
+ope.Ejercicio50()
+ope.Ejercicio51()
+ope.Ejercicio52()
+ope.Ejercicio53()
+ope.Ejercicio54()
+ope.Ejercicio55()
+ope.Ejercicio56()
+ope.Ejercicio57()
+ope.Ejercicio58()
+ope.Ejercicio59()
+ope.Ejercicio60()
+ope.Ejercicio61()
+ope.Ejercicio63()
+ope.Ejercicio64()
+ope.Ejercicio65()
+ope.Ejercicio66()
+ope.Ejercicio67()
